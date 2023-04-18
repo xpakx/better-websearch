@@ -1,9 +1,12 @@
 let items = [];
 let active = null;
 let gPressed = false;
+let searchbox = null;
+let inputMode = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     items = document.querySelectorAll(".snippet");
+    searchbox = document.querySelector("#searchbox");
 
     fetch(chrome.runtime.getURL("styles/style.css"))
         .then(response => response.text())
@@ -12,6 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
             style.innerHTML = css;
             document.head.insertAdjacentElement('beforeend', style);
         });
+
+    searchbox.addEventListener("focus", function () {
+        inputMode = true;
+    });
+
+    searchbox.addEventListener("blur", function () {
+        inputMode = false;
+    });
 });
 
 
@@ -25,7 +36,7 @@ function prev() {
 
 
 function selectItem(next) {
-    if(next < 0 || next >= items.length) {
+    if (next < 0 || next >= items.length) {
         return;
     }
     if (active != null) {
@@ -60,6 +71,12 @@ function goToLink(newTab = false) {
 
 
 document.addEventListener('keydown', function (event) {
+    if(inputMode) {
+        if (event.key === 'Escape') {
+            searchbox.blur();
+        }
+        return;
+    }
     if (event.key === 'j') {
         prev();
     } else if (event.key === 'k') {
@@ -74,7 +91,7 @@ document.addEventListener('keydown', function (event) {
     } else if (event.key === 'g' && !gPressed) {
         gPressed = true;
     } else if (event.key === 'G') {
-        selectItem(items.length-1);
+        selectItem(items.length - 1);
     }
 
     if (gPressed && event.key !== 'g') {
