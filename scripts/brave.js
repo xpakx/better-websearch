@@ -77,9 +77,9 @@ document.addEventListener('keydown', function (event) {
         }
         return;
     }
-    if (event.key === 'j') {
+    if (event.key === 'k') {
         prev();
-    } else if (event.key === 'k') {
+    } else if (event.key === 'j') {
         next();
     } else if (event.key === ' ' && active != null) {
         event.preventDefault();
