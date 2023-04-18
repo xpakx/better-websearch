@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Better websearch",
+  "version": "1.0",
+  "description": "Better websearch experience",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://search.brave.com/*"],
+      "js": ["scripts/brave.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "styles/style.css"
+  ]
+}

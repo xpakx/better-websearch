@@ -1,0 +1,9 @@
+.selected {
+  background-color: #19213d;
+}
+
+.selected-brave {
+  background-color: #19213d !important;
+  border: solid 2px #7675fd;
+  z-index: 25;
+}
